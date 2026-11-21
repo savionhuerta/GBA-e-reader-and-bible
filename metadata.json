@@ -1,0 +1,6 @@
+{
+  "name": "GBA Scripture Studio",
+  "description": "Compile your ESV Bible JSON into a bootable Game Boy Advance (.gba) flashcart ROM with custom typography, palettes, SRAM bookmarks, and live hardware preview.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

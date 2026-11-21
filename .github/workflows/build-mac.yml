@@ -1,0 +1,38 @@
+name: Build macOS App
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, master]
+
+jobs:
+  build-mac:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Build static web bundle
+        run: |
+          npm install --legacy-peer-deps
+          npm run build
+          rm -rf macos/app-dist
+          cp -R dist macos/app-dist
+
+      - name: Package macOS .app & .dmg (Universal)
+        working-directory: macos
+        run: |
+          npm install
+          npx electron-builder --mac --universal --publish never
+
+      - name: Upload macOS App Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: GBA-Scripture-Studio-macOS
+          path: |
+            dist-mac/*.dmg
+            dist-mac/*.zip
+            dist-mac/mac-universal/GBA Scripture Studio.app

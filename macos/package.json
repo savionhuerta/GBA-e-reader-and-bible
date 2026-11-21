@@ -1,0 +1,46 @@
+{
+  "name": "gba-scripture-studio-macos",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Standalone macOS .app packager for GBA Scripture Studio",
+  "main": "main.cjs",
+  "scripts": {
+    "start": "electron .",
+    "pack:mac": "electron-builder --mac --universal --publish never"
+  },
+  "devDependencies": {
+    "electron": "^35.0.0",
+    "electron-builder": "^26.0.12"
+  },
+  "build": {
+    "appId": "com.gbascripture.studio",
+    "productName": "GBA Scripture Studio",
+    "directories": {
+      "output": "../dist-mac"
+    },
+    "files": [
+      "main.cjs",
+      "app-dist/**/*",
+      "package.json"
+    ],
+    "mac": {
+      "category": "public.app-category.utilities",
+      "icon": "icon.png",
+      "identity": null,
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "universal"
+          ]
+        },
+        {
+          "target": "zip",
+          "arch": [
+            "universal"
+          ]
+        }
+      ]
+    }
+  }
+}
